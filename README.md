@@ -27,10 +27,10 @@ Academic dishonesty is any time you purposefully make it difficult to correctly 
 
 ## Grading Outline
 
-- [ ] Hash Tables
+- [1] Hash Tables
 - [ ] Queue vs. Stack
-- [ ] Stack.add
-- [ ] Stack.remove
+- [1] Stack.add
+- [1] Stack.remove
 - [ ] Array.first
 - [ ] Array.last
 
