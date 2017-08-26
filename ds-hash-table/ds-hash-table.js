@@ -5,12 +5,45 @@ var makeHashTable = function() {
     return {
       _storage: [],
       retrieve: function(key) {
-        return this._storage[hashFn(key, max)];
+        if(!Array.isArray(this._storage[hashFn(key, max)]))// check if the index is having only one item.
+        {
+         return this._storage[hashFn(key, max)];
+        }
+        else // check if the index is an array.
+        {
+          var targetArray = this._storage[hashFn(key, max)];
+
+          for (var i = 0; i < targetArray.length; i++) { // iterate all elements.
+            if(targetArray[i][0] === key) // if the element has the key in its zero index.
+            {
+              return targetArray[i][1];
+            }
+          }
+            return targetArray[0]; // if the element does not have the key in its zero idex, becuase that it was the first element stored.
+        }      
       },
 
       insert: function(key, value) {
         //your code is here
-        this._storage[hashFn(key, max)] = value;
+        var index = hashFn(key, max);
+        if(this._storage[index] !== undefined)// check if there is values in this index.
+        {
+          if(!Array.isArray(this._storage[index]))// check if the index is having only one item or this is the second time we use.
+          {
+            var oldValue = this._storage[index];
+            this._storage[index] = [];
+            this._storage[index].push(oldValue);
+            this._storage[index].push([key, value]);// store an array with key and value.
+          }
+          else // check if the index is an array or this the third time we use.
+          {
+            this._storage[index].push([key, value]);
+          }
+        }
+        else
+        {
+          this._storage[index] = value;
+        }
     }
   }
 };
